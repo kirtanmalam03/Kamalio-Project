@@ -1,0 +1,38 @@
+# Environment and secrets
+.env
+*.env.local
+
+# OS / editor
+.DS_Store
+Thumbs.db
+*.swp
+*~
+.idea/
+.vscode/
+*.code-workspace
+
+# Logs and runtime
+*.log
+logs/
+tmp/
+temp/
+
+# Docker / local volumes (if ever bind-mounted)
+mysql/data/
+mysql/volume/
+
+# SIPp / capture artifacts
+sipp/*.csv
+sipp/*.log
+*.pcap
+*.cap
+
+# Python / tooling (if added later)
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Backup files
+*.bak
+*~

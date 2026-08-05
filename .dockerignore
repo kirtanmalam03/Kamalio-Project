@@ -1,0 +1,7 @@
+# Ignore local files from Docker build context
+*.log
+*.tmp
+.git
+.gitignore
+node_modules
+.DS_Store

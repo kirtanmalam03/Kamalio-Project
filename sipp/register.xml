@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!--
+  SIPp scenario: Digest-authenticated SIP REGISTER
+
+  What this does:
+    1) Sends REGISTER without credentials
+    2) Expects 401 Unauthorized (challenge)
+    3) Sends REGISTER with Authorization (digest)
+    4) Expects 200 OK
+
+  Example (from project root, Kamailio already running):
+
+    docker run --rm -it --network voip-net ^
+      -v "%CD%/sipp:/sipp" ctaloi/sipp:latest ^
+      kamailio -sf /sipp/register.xml -m 1 -s 1001 -au 1001 -ap password1001
+
+  On Linux/macOS:
+
+    docker run --rm -it --network voip-net \
+      -v "$(pwd)/sipp:/sipp" ctaloi/sipp:latest \
+      kamailio -sf /sipp/register.xml -m 1 -s 1001 -au 1001 -ap password1001
+-->
+<!DOCTYPE scenario SYSTEM "sipp.dtd">
+<scenario name="Basic SIP REGISTER with auth">
+
+  <!-- Initial REGISTER (no Authorization yet) -->
+  <send retrans="500">
+    <![CDATA[
+      REGISTER sip:[remote_ip]:[remote_port] SIP/2.0
+      Via: SIP/2.0/[transport] [local_ip]:[local_port];branch=[branch]
+      From: <sip:[service]@kamailio.local>;tag=[pid]SIPpTag00[call_number]
+      To: <sip:[service]@kamailio.local>
+      Call-ID: [call_id]
+      CSeq: 1 REGISTER
+      Contact: <sip:[service]@[local_ip]:[local_port]>
+      Max-Forwards: 70
+      Expires: 3600
+      User-Agent: SIPp-Kamailio-Beginner
+      Content-Length: 0
+    ]]>
+  </send>
+
+  <!-- Expect digest challenge -->
+  <recv response="401" auth="true" rtd="true">
+  </recv>
+
+  <!-- Authenticated REGISTER -->
+  <send retrans="500">
+    <![CDATA[
+      REGISTER sip:[remote_ip]:[remote_port] SIP/2.0
+      Via: SIP/2.0/[transport] [local_ip]:[local_port];branch=[branch]
+      From: <sip:[service]@kamailio.local>;tag=[pid]SIPpTag00[call_number]
+      To: <sip:[service]@kamailio.local>
+      Call-ID: [call_id]
+      CSeq: 2 REGISTER
+      Contact: <sip:[service]@[local_ip]:[local_port]>
+      [authentication]
+      Max-Forwards: 70
+      Expires: 3600
+      User-Agent: SIPp-Kamailio-Beginner
+      Content-Length: 0
+    ]]>
+  </send>
+
+  <!-- Success -->
+  <recv response="200" rtd="true">
+  </recv>
+
+  <ResponseTimeRepartition value="10, 20, 30, 40, 50, 100, 150, 200"/>
+  <CallLengthRepartition value="10, 50, 100, 500, 1000, 5000, 10000"/>
+</scenario>
