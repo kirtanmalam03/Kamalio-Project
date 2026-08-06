@@ -1,7 +1,3 @@
-#!/bin/bash
-# Wait for MySQL, write preprocessor defines, then start Kamailio.
-# -DD = don't daemonize (stay in foreground for Docker)
-# -E  = log to stderr (visible via docker compose logs)
 
 set -euo pipefail
 
@@ -42,8 +38,6 @@ echo "[entrypoint] Demo SIP subscribers in DB: ${USER_COUNT}"
 
 DBURL="mysql://${MYSQL_USER}:${MYSQL_PASSWORD}@${MYSQL_HOST}:${MYSQL_PORT}/${MYSQL_DATABASE}"
 
-# Write preprocessor substitutions (quoted string-safe).
-# Delimiter is '#' — avoid '#' inside passwords or SIP_DOMAIN.
 mkdir -p /etc/kamailio
 cat > /etc/kamailio/local.defs <<EOF
 #!substdef "#DBURL#${DBURL}#g"
