@@ -19,21 +19,9 @@ A small Docker-based lab for learning and testing SIP registration and call sign
 From the project folder:
 
 ```powershell
-Copy-Item .env.example .env
 docker compose up -d --build
 docker compose logs -f kamailio
 ```
-
-To stop the lab:
-
-```powershell
-docker compose down
-```
-
-```powershell
-docker compose down -v
-```
-
 ## Demo SIP accounts
 
 | Extension | Password |
@@ -47,8 +35,6 @@ Default server address: `127.0.0.1:5060`
 
 
 ## Test registration
-
-
 
 ```powershell
 python sipp\register_test.py 127.0.0.1 5060 1001 password1001 kamailio.local
