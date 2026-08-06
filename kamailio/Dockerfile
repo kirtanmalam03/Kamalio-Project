@@ -1,5 +1,3 @@
-# Kamailio SIP Server - Beginner Project Image
-# Installs Kamailio + MySQL module from the official Kamailio 5.8 Debian repo.
 
 FROM debian:bookworm-slim
 
@@ -27,8 +25,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && mkdir -p /var/run/kamailio \
     && chown kamailio:kamailio /var/run/kamailio \
     && rm -rf /var/lib/apt/lists/*
-
-# Entry script waits for MySQL, then starts Kamailio in foreground
+    
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
