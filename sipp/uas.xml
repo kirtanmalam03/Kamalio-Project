@@ -1,13 +1,5 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
-<!--
-  Simple SIPp User Agent Server (auto-answer).
-  Useful when testing call.xml without a softphone.
 
-  Important beginner note:
-  Kamailio routes INVITEs using its location table. A raw SIPp UAS is only
-  reachable if that Contact was registered first (or if you call SIPp directly).
-  Prefer registering a softphone as 1002 for the first successful call demo.
--->
 <!DOCTYPE scenario SYSTEM "sipp.dtd">
 <scenario name="Basic UAS auto-answer">
 
