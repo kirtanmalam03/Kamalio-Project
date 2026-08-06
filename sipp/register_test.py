@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+
 """Minimal SIP REGISTER test (digest auth) for the beginner lab."""
 import hashlib
 import random
@@ -21,7 +21,7 @@ def md5(s: str) -> str:
 
 
 def parse_auth_header(msg: str):
-    # WWW-Authenticate: Digest realm="...", nonce="...", ...
+   
     m = re.search(r"WWW-Authenticate:\s*Digest\s+(.+)", msg, re.I)
     if not m:
         raise RuntimeError("No WWW-Authenticate header in 401 response")
@@ -61,7 +61,7 @@ def main():
     sock.settimeout(TIMEOUT)
     sock.bind(("0.0.0.0", 0))
     local_port = sock.getsockname()[1]
-    # For Docker host testing, Contact host 127.0.0.1 is fine for registration proof
+
     contact_host = "127.0.0.1"
 
     call_id = f"{uuid.uuid4().hex}@python-test"
