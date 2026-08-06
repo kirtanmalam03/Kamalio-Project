@@ -1,4 +1,4 @@
-
+ 
 
 INSERT INTO subscriber (username, domain, password, ha1, ha1b) VALUES
   (

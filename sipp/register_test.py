@@ -1,5 +1,4 @@
- 
-"""Minimal SIP REGISTER test (digest auth) for the beginner lab."""
+
 import hashlib
 import random
 import re
@@ -124,3 +123,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+ 

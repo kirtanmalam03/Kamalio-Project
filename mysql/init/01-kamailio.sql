@@ -1,5 +1,5 @@
 
-
+ 
 USE kamailio;
 
 CREATE TABLE IF NOT EXISTS version (

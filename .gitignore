@@ -1,8 +1,8 @@
-# Environment and secrets
+
 .env
 *.env.local
 
-# OS / editor
+ 
 .DS_Store
 Thumbs.db
 *.swp
@@ -17,11 +17,10 @@ logs/
 tmp/
 temp/
 
-# Docker / local volumes (if ever bind-mounted)
+
 mysql/data/
 mysql/volume/
 
-# SIPp / capture artifacts
 sipp/*.csv
 sipp/*.log
 *.pcap

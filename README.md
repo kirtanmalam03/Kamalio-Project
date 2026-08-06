@@ -1,8 +1,4 @@
-# Kamailio SIP Beginner Lab
-
 A small Docker-based lab for learning and testing SIP registration and call signalling with **Kamailio** and **MySQL**.
-
-> This project is for learning and local testing. It is not a production-ready telephone system.
 
 ## What it does
 
@@ -11,8 +7,6 @@ A small Docker-based lab for learning and testing SIP registration and call sign
 - Provides three demo users: `1001`, `1002`, and `1003`.
 - Includes a Python REGISTER test and SIPp scenario files.
 - Supports UDP and TCP SIP on port `5060` by default.
-
-Kamailio handles SIP signalling only. It does not provide RTP/media relay, voicemail, IVR, or PBX features.
 
 ## Requirements
 
@@ -36,8 +30,6 @@ To stop the lab:
 docker compose down
 ```
 
-To remove the database volume as well (this deletes local registrations and test data):
-
 ```powershell
 docker compose down -v
 ```
@@ -53,11 +45,10 @@ docker compose down -v
 Default SIP domain/realm: `kamailio.local`  
 Default server address: `127.0.0.1:5060`
 
-These credentials are deliberately public demo values. Change them before exposing this server to any network.
 
 ## Test registration
 
-After the containers are running, execute:
+
 
 ```powershell
 python sipp\register_test.py 127.0.0.1 5060 1001 password1001 kamailio.local
@@ -112,7 +103,3 @@ docker-compose.yml Starts the Kamailio and MySQL containers
 - The active Kamailio configuration is `kamailio/kamailio.cfg`.
 - The root `cfg/kamailio.cfg` and root `Dockerfile` are older reference files and are not used by `docker compose`.
 - SIPp test scenarios are intended for signalling checks; media/RTP is outside this project's scope.
-
-## License
-
-Add a license appropriate for your use before sharing or distributing this project.

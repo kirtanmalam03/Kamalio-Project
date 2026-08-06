@@ -6,7 +6,7 @@
   <recv request="INVITE" crlf="true"> 
   </recv>
 
-  <send>
+  <send> 
     <![CDATA[
       SIP/2.0 180 Ringing
       [last_Via:]
