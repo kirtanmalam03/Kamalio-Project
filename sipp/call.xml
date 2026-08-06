@@ -1,19 +1,5 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
-<!--
-  SIPp scenario: Authenticated INVITE + ACK + BYE (UAC)
 
-  Prerequisites:
-    1) User 1001 is registered (run register.xml first, OR use a real softphone)
-    2) User 1002 is registered and can answer / auto-answer
-
-  Kamailio challenges INVITE with 407 Proxy Authentication Required.
-
-  Example:
-
-    docker run --rm -it --network voip-net ^
-      -v "%CD%/sipp:/sipp" ctaloi/sipp:latest ^
-      kamailio -sf /sipp/call.xml -m 1 -s 1002
--->
 <!DOCTYPE scenario SYSTEM "sipp.dtd">
 <scenario name="Basic SIP call (INVITE/ACK/BYE)">
 
