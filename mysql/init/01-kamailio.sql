@@ -1,27 +1,7 @@
--- =============================================================================
--- Kamailio Beginner Project - MySQL initialization
--- =============================================================================
--- Runs automatically on FIRST MySQL container start
--- (Docker mounts this folder to /docker-entrypoint-initdb.d).
---
--- Creates:
---   * version table (Kamailio module schema tracking)
---   * subscriber table (SIP usernames / passwords)
---   * location table (registered Contacts / AoRs)
---   * demo users 1001 and 1002
---
--- DEMO CREDENTIALS — change before any real deployment:
---   1001 / password1001
---   1002 / password1002
---
--- Schema aligned with Kamailio 5.8 MySQL module expectations.
--- =============================================================================
+
 
 USE kamailio;
 
--- ---------------------------------------------------------------------------
--- version
--- ---------------------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS version (
   table_name VARCHAR(32) NOT NULL,
   table_version INT UNSIGNED NOT NULL DEFAULT 0,
@@ -33,10 +13,7 @@ INSERT INTO version (table_name, table_version) VALUES
   ('location', 9)
 ON DUPLICATE KEY UPDATE table_version = VALUES(table_version);
 
--- ---------------------------------------------------------------------------
--- subscriber (SIP accounts)
--- password column is used because auth_db calculate_ha1=1
--- ---------------------------------------------------------------------------
+
 CREATE TABLE IF NOT EXISTS subscriber (
   id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   username VARCHAR(64) NOT NULL DEFAULT '',
@@ -51,9 +28,6 @@ CREATE TABLE IF NOT EXISTS subscriber (
   KEY username_idx (username)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- ---------------------------------------------------------------------------
--- location (usrloc / registrar bindings)
--- ---------------------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS location (
   id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   ruid VARCHAR(64) NOT NULL DEFAULT '',
@@ -84,11 +58,6 @@ CREATE TABLE IF NOT EXISTS location (
   KEY expires_idx (expires)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- ---------------------------------------------------------------------------
--- Demo SIP users
--- Domain matches SIP_DOMAIN in .env (kamailio.local by default).
--- With auth_db use_domain=0, lookup is by username; domain is still stored.
--- ---------------------------------------------------------------------------
 INSERT INTO subscriber (username, domain, password, ha1, ha1b) VALUES
   (
     '1001',
@@ -116,5 +85,5 @@ ON DUPLICATE KEY UPDATE
   ha1 = VALUES(ha1),
   ha1b = VALUES(ha1b);
 
--- Helpful verification query (visible in mysql docker init logs)
+
 SELECT id, username, domain, password FROM subscriber;
