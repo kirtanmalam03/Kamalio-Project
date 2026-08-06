@@ -3,7 +3,7 @@
 <!DOCTYPE scenario SYSTEM "sipp.dtd">
 <scenario name="Basic UAS auto-answer">
 
-  <recv request="INVITE" crlf="true">
+  <recv request="INVITE" crlf="true"> 
   </recv>
 
   <send>
