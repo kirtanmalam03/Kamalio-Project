@@ -1,7 +1,4 @@
--- Run against a live DB if you already created the volume before 1003 existed:
---   docker compose exec -T mysql mysql -ukamailio -pkamailiorw_change_me kamailio < scripts/add-user.sql
---
--- Or add your own extension (change the numbers/password).
+
 
 INSERT INTO subscriber (username, domain, password, ha1, ha1b) VALUES
   (
