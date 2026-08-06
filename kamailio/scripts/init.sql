@@ -1,5 +1,4 @@
--- Manual import copy of mysql/init/01-kamailio.sql
--- Prefer automatic init via Docker Compose on first MySQL start.
+
 
 USE kamailio;
 
