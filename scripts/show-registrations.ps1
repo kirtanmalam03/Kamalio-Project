@@ -1,4 +1,3 @@
-# List who is currently registered (usrloc + MySQL location table)
 
 Write-Host "=== kamcmd ul.dump ==="
 docker compose exec kamailio kamcmd ul.dump
