@@ -1,4 +1,4 @@
-
+ 
 """Minimal SIP REGISTER test (digest auth) for the beginner lab."""
 import hashlib
 import random
