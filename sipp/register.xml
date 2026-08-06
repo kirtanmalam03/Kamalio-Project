@@ -1,29 +1,7 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
-<!--
-  SIPp scenario: Digest-authenticated SIP REGISTER
 
-  What this does:
-    1) Sends REGISTER without credentials
-    2) Expects 401 Unauthorized (challenge)
-    3) Sends REGISTER with Authorization (digest)
-    4) Expects 200 OK
-
-  Example (from project root, Kamailio already running):
-
-    docker run --rm -it --network voip-net ^
-      -v "%CD%/sipp:/sipp" ctaloi/sipp:latest ^
-      kamailio -sf /sipp/register.xml -m 1 -s 1001 -au 1001 -ap password1001
-
-  On Linux/macOS:
-
-    docker run --rm -it --network voip-net \
-      -v "$(pwd)/sipp:/sipp" ctaloi/sipp:latest \
-      kamailio -sf /sipp/register.xml -m 1 -s 1001 -au 1001 -ap password1001
--->
 <!DOCTYPE scenario SYSTEM "sipp.dtd">
 <scenario name="Basic SIP REGISTER with auth">
-
-  <!-- Initial REGISTER (no Authorization yet) -->
   <send retrans="500">
     <![CDATA[
       REGISTER sip:[remote_ip]:[remote_port] SIP/2.0
@@ -40,11 +18,10 @@
     ]]>
   </send>
 
-  <!-- Expect digest challenge -->
+
   <recv response="401" auth="true" rtd="true">
   </recv>
 
-  <!-- Authenticated REGISTER -->
   <send retrans="500">
     <![CDATA[
       REGISTER sip:[remote_ip]:[remote_port] SIP/2.0
@@ -62,7 +39,7 @@
     ]]>
   </send>
 
-  <!-- Success -->
+
   <recv response="200" rtd="true">
   </recv>
 
