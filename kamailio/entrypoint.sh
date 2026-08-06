@@ -1,7 +1,7 @@
 
 set -euo pipefail
 
-MYSQL_HOST="${MYSQL_HOST:-mysql}"
+MYSQL_HOST="${MYSQL_HOST:-mysql}" 
 MYSQL_PORT="${MYSQL_PORT:-3306}"
 MYSQL_USER="${MYSQL_USER:-kamailio}"
 MYSQL_PASSWORD="${MYSQL_PASSWORD:-kamailiorw}"
